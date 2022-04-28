@@ -16,7 +16,9 @@ export class ProductDeleteComponent implements OnInit {
               private router: Router) {
     this.activedRoute.paramMap.subscribe((paraMap: ParamMap) => {
       const id = +paraMap.get('id');
-      this.product = this.productService.getProductById(id);
+      this.productService.getProductById(id).subscribe((product) => {
+        this.product = product;
+      });
     });
   }
 
@@ -24,7 +26,11 @@ export class ProductDeleteComponent implements OnInit {
   }
 
   submit() {
-    this.productService.delete(this.product.id);
-    this.router.navigateByUrl('/product/list');
+    this.productService.delete(this.product.id).subscribe(() => {
+      this.router.navigateByUrl('/product/list');
+      console.log('Deleted successfully!');
+    }, error => {
+      console.log('Deleted error!');
+    });
   }
 }

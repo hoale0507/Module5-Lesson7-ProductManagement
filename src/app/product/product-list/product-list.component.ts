@@ -18,6 +18,11 @@ export class ProductListComponent implements OnInit {
   }
 
   getAll() {
-    this.products = this.productService.getAll();
+    const observable = this.productService.getAll();
+    observable.subscribe((productsFromBE) => {
+      this.products = productsFromBE;
+    }, error => {
+      console.log(error);
+    });
   }
 }

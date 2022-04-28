@@ -10,7 +10,6 @@ import {Router} from '@angular/router';
 })
 export class ProductCreateComponent implements OnInit {
   productForm: FormGroup = new FormGroup({
-    id: new FormControl(),
     name: new FormControl(),
     price: new FormControl(),
     description: new FormControl(),
@@ -24,9 +23,14 @@ export class ProductCreateComponent implements OnInit {
   }
 
   create(productForm) {
-    this.productService.createProduct(productForm.value);
-    this.productForm.reset();
-    this.router.navigateByUrl('/product/list');
+    const observable = this.productService.createProduct(productForm.value);
+    observable.subscribe(() => {
+      console.log('Create successfully!');
+      this.router.navigateByUrl('/product/list');
+      this.productForm.reset();
+    }, error => {
+      console.log(error);
+    } );
   }
 
 }

@@ -1,70 +1,35 @@
 import {Injectable} from '@angular/core';
 import {Product} from '../model/product';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {environment} from '../../environments/environment';
+
+const API_URL = `${environment.apiURL}`;
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
-  products: Product[] = [{
-    id: 1,
-    name: 'IPhone 12',
-    price: 2400000,
-    description: 'New'
-  }, {
-    id: 2,
-    name: 'IPhone 11',
-    price: 1560000,
-    description: 'Like new'
-  }, {
-    id: 3,
-    name: 'IPhone X',
-    price: 968000,
-    description: '97%'
-  }, {
-    id: 4,
-    name: 'IPhone 8',
-    price: 7540000,
-    description: '98%'
-  }, {
-    id: 5,
-    name: 'IPhone 11 Pro',
-    price: 1895000,
-    description: 'Like new'
-  }];
-
-  constructor() {
+  constructor(private http: HttpClient) {
   }
 
-  getAll() {
-    return this.products;
+  getAll(): Observable<Product[]> {
+    return this.http.get<Product[]>(`${API_URL}/products`);
   }
 
-  createProduct(product) {
-    this.products.push(product);
+  createProduct(product): Observable<Product> {
+    return this.http.post<Product>(`${API_URL}/products`, product);
   }
 
-  getProductById(id: number) {
-    for (let i = 0; i < this.products.length; i++) {
-      if (this.products[i].id === id) {
-        return this.products[i];
-      }
-    }
-    return null;
+  getProductById(id: number): Observable<Product> {
+    return this.http.get<Product>(`${API_URL}/products/${id}`);
   }
 
-  update(id, product) {
-    for (let i = 0; i < this.products.length; i++) {
-      if (this.products[i].id === id) {
-        this.products[i] = product;
-      }
-    }
+  update(id, product): Observable<Product> {
+    return this.http.put(`${API_URL}/products/${id}`, product);
   }
 
-  delete(id) {
-    for (let i = 0; i < this.products.length; i++) {
-      if (this.products[i].id === id) {
-        this.products.splice(i, 1);
-      }
-    }
+  delete(id): Observable<Product> {
+    return this.http.delete(`${API_URL}/products/${id}`);
   }
 }

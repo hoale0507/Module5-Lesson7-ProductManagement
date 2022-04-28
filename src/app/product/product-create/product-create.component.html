@@ -2,16 +2,12 @@
 <a routerLink="/product/list"></a>
 <form (ngSubmit)="create(productForm)" [formGroup]="productForm">
   <div>
-    <label for="id">ID</label>
-    <input type="number" id="id" formControlName="id">
-  </div>
-  <div>
     <label for="name">Name</label>
     <input type="text" id="name" formControlName="name">
   </div>
   <div>
-    <label for="id">Price</label>
-    <input type="number" formControlName="price">
+    <label for="price">Price</label>
+    <input type="number" id="price" formControlName="price">
   </div>
   <div>
     <label for="description">Description</label>

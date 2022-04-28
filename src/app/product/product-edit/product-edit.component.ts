@@ -3,6 +3,7 @@ import {FormControl, FormGroup} from '@angular/forms';
 import {Product} from '../../model/product';
 import {ProductService} from '../../service/product.service';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
+import {error} from 'protractor';
 
 @Component({
   selector: 'app-product-edit',
@@ -28,18 +29,27 @@ export class ProductEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.productForm.get('id').setValue(this.product.id);
-    this.productForm.get('name').setValue(this.product.name);
-    this.productForm.get('price').setValue(this.product.price);
-    this.productForm.get('description').setValue(this.product.description);
   }
 
   submit() {
-    this.productService.update(this.product.id, this.productForm.value);
-    this.router.navigateByUrl('/product/list');
+    this.productService.update(this.product.id, this.productForm.value).subscribe(() => {
+      this.router.navigateByUrl('/product/list');
+      console.log('Edited successfully!');
+      // tslint:disable-next-line:no-shadowed-variable
+    }, error => {
+      console.log(error);
+    });
   }
 
   getProductById(id) {
-    this.product = this.productService.getProductById(id);
+    this.productService.getProductById(id).subscribe(product => {
+      this.product = product;
+      this.productForm.get('id').setValue(this.product.id);
+      this.productForm.get('name').setValue(this.product.name);
+      this.productForm.get('price').setValue(this.product.price);
+      this.productForm.get('description').setValue(this.product.description);
+    }, er => {
+      console.log(er);
+    });
   }
 }
