@@ -1,0 +1,20 @@
+<h1>Form edit product</h1>
+<form [formGroup]="productForm" (ngSubmit)="submit()">
+  <div>
+    <label for="id">Id:</label>
+    <input type="number" id="id" formControlName="id">
+  </div>
+  <div>
+    <label for="name">Name:</label>
+    <input type="text" id="name" formControlName="name">
+  </div>
+  <div>
+    <label for="price">Price:</label>
+    <input type="text" id="price" formControlName="price">
+  </div>
+  <div>
+    <label for="description">Description:</label>
+    <input type="text" id="description" formControlName="description">
+  </div>
+  <button>Edit</button>
+</form>

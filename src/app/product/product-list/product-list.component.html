@@ -5,11 +5,15 @@
     <td>Name</td>
     <td>Price</td>
     <td>Description</td>
+    <td>Edit</td>
+    <td>Delete</td>
   </tr>
   <tr *ngFor="let product of products; index as i">
     <td>{{i+1}}</td>
     <td>{{product.name}}</td>
     <td>{{product.price}}</td>
     <td>{{product.description}}</td>
+    <td><a routerLink="/product/edit/{{product.id}}">Edit</a></td>
+    <td><a routerLink="/product/delete/{{product.id}}">Delete</a></td>
   </tr>
 </table>
