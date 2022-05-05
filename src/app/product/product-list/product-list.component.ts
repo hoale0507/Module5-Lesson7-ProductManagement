@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {ProductService} from '../../service/product.service';
+import {ProductService} from '../../service/product/product.service';
 import {Product} from '../../model/product';
+
+declare var $: any;
 
 @Component({
   selector: 'app-product-list',
@@ -21,8 +23,17 @@ export class ProductListComponent implements OnInit {
     const observable = this.productService.getAll();
     observable.subscribe((productsFromBE) => {
       this.products = productsFromBE;
-    }, error => {
-      console.log(error);
+      $(function() {
+        $('#product-list').DataTable({
+          'paging': true,
+          'lengthChange': false,
+          'searching': true,
+          'ordering': true,
+          'info': true,
+          'autoWidth': false,
+          "responsive": true,
+        });
+      });
     });
   }
 }

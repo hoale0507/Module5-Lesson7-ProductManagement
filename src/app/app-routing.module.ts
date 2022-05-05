@@ -8,20 +8,8 @@ import {ProductDeleteComponent} from './product/product-delete/product-delete.co
 
 const routes: Routes = [
   {
-    path: 'product/list',
-    component: ProductListComponent
-  },
-  {
-    path: 'product/create',
-    component: ProductCreateComponent
-  },
-  {
-    path: 'product/edit/:id',
-    component: ProductEditComponent
-  },
-  {
-    path: 'product/delete/:id',
-    component: ProductDeleteComponent
+    path: 'product',
+    loadChildren: () => import('./product/product.module').then(module => module.ProductModule)
   }
 ];
 

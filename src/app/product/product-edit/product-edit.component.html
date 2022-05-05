@@ -1,20 +1,66 @@
-<h1>Form edit product</h1>
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Edit Product</h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a routerLink="/product/list">Home</a></li>
+          <li class="breadcrumb-item active">Edit Product</li>
+        </ol>
+      </div>
+    </div>
+  </div><!-- /.container-fluid -->
+</section>
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card card-primary">
+          <div class="card-header">
+            <!--        <a routerLink="/product/list">Back to Product List</a> <span> / </span><br>-->
+            <h3 class="card-title">Update product</h3>
+          </div>
 <form [formGroup]="productForm" (ngSubmit)="submit()">
-  <div>
+  <div class="card-body">
+  <div class="form-group">
     <label for="id">Id:</label>
     <input type="number" id="id" formControlName="id" disabled>
   </div>
-  <div>
+  <div class="form-group">
     <label for="name">Name:</label>
-    <input type="text" id="name" formControlName="name">
+    <input type="text" id="name" formControlName="name" class="form-control">
   </div>
-  <div>
+  <div class="form-group">
     <label for="price">Price:</label>
-    <input type="text" id="price" formControlName="price">
+    <input type="text" id="price" formControlName="price" class="form-control">
   </div>
-  <div>
+  <div class="form-group">
     <label for="description">Description:</label>
-    <input type="text" id="description" formControlName="description">
+    <input type="text" id="description" formControlName="description" class="form-control">
   </div>
-  <button>Edit</button>
+  <div class="form-group">
+    <label for="category">Category:</label>
+    <select id="category" formControlName="category" class="form-control">
+      <option>Choose category</option>
+      <option *ngFor="let category of categories" value="{{category.id}}">{{category.name}}</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="image">Image:</label>
+    <input type="file" id="image" formControlName="image" class="form-control">
+    <br>
+    <img src="http://localhost:8080/image/{{product.image}}" alt="image">
+  </div>
+  </div>
+  <div class="card-footer">
+  <button class="btn btn-primary">Edit</button>
+  </div>
 </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

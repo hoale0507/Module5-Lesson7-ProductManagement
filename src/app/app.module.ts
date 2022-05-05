@@ -9,14 +9,14 @@ import {ReactiveFormsModule} from '@angular/forms';
 import { ProductEditComponent } from './product/product-edit/product-edit.component';
 import { ProductDeleteComponent } from './product/product-delete/product-delete.component';
 import {HttpClientModule} from '@angular/common/http';
+import { NavbarComponent } from './shared/navbar/navbar.component';
+import { SidebarComponent } from './shared/sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ProductListComponent,
-    ProductCreateComponent,
-    ProductEditComponent,
-    ProductDeleteComponent
+    NavbarComponent,
+    SidebarComponent
   ],
     imports: [
         BrowserModule,

@@ -1,19 +1,93 @@
-<h1>Product List</h1>
-<table>
-  <tr>
-    <td>#</td>
-    <td>Name</td>
-    <td>Price</td>
-    <td>Description</td>
-    <td>Edit</td>
-    <td>Delete</td>
-  </tr>
-  <tr *ngFor="let product of products; index as i">
-    <td>{{i+1}}</td>
-    <td>{{product.name}}</td>
-    <td>{{product.price}}</td>
-    <td>{{product.description}}</td>
-    <td><a routerLink="/product/edit/{{product.id}}">Edit</a></td>
-    <td><a routerLink="/product/delete/{{product.id}}">Delete</a></td>
-  </tr>
-</table>
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Product Management</h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item active">Product Management</li>
+        </ol>
+      </div>
+    </div>
+  </div><!-- /.container-fluid -->
+</section>
+<section class="content">
+  <div class="container-fluid">
+<div class="row">
+<div class="col-12">
+<div class="card">
+  <div class="card-header">
+    <h3 class="card-title">Product List</h3>
+    <button routerLink="/product/create" class="btn btn-primary" style="float: right;">Create Product</button>
+  </div>
+  <!-- /.card-header -->
+  <div class="card-body">
+    <table id="product-list" class="table table-bordered table-hover">
+      <thead>
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Description</th>
+        <th>Category</th>
+        <th>Image</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let product of products; index as i">
+        <td>{{i+1}}</td>
+        <td>{{product.name}}</td>
+        <td>{{product.price}}</td>
+        <td>{{product.description}}</td>
+        <td>{{product.category?.name}}</td>
+        <td><img src="http://localhost:8080/image/{{product.image}}" alt="image"></td>
+        <td class="text-center"><a routerLink="/product/edit/{{product.id}}" class="btn btn-primary"><i class="fa fa-edit"></i></a></td>
+        <td class="text-center"><a routerLink="/product/delete/{{product.id}}" class="btn btn-danger"><i class="fa fa-trash"></i></a></td>
+      </tr>
+      </tbody>
+      <tfoot>
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Description</th>
+        <th>Category</th>
+        <th>Image</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+      </tfoot>
+    </table>
+  </div>
+  <!-- /.card-body -->
+</div>
+</div>
+</div>
+  </div>
+</section>
+<!--<h1>Product List</h1>-->
+<!--<table>-->
+<!--  <tr>-->
+<!--    <td>#</td>-->
+<!--    <td>Name</td>-->
+<!--    <td>Price</td>-->
+<!--    <td>Description</td>-->
+<!--    <td>Image</td>-->
+<!--    <td>Edit</td>-->
+<!--    <td>Delete</td>-->
+<!--  </tr>-->
+<!--  <tr *ngFor="let product of products; index as i">-->
+<!--    <td>{{i+1}}</td>-->
+<!--    <td>{{product.name}}</td>-->
+<!--    <td>{{product.price}}</td>-->
+<!--    <td>{{product.description}}</td>-->
+<!--    <td><img src="http://localhost:8080/image/{{product.image}}" alt="image"></td>-->
+<!--    <td><a routerLink="/product/edit/{{product.id}}">Edit</a></td>-->
+<!--    <td><a routerLink="/product/delete/{{product.id}}">Delete</a></td>-->
+<!--  </tr>-->
+<!--</table>-->

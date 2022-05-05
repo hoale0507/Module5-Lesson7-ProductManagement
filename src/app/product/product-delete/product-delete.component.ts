@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Product} from '../../model/product';
-import {ProductService} from '../../service/product.service';
+import {ProductService} from '../../service/product/product.service';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
+import {NotificationService} from '../../service/notification/notification.service';
 
 @Component({
   selector: 'app-product-delete',
@@ -13,7 +14,8 @@ export class ProductDeleteComponent implements OnInit {
 
   constructor(private productService: ProductService,
               private activedRoute: ActivatedRoute,
-              private router: Router) {
+              private router: Router,
+              private notificationService: NotificationService) {
     this.activedRoute.paramMap.subscribe((paraMap: ParamMap) => {
       const id = +paraMap.get('id');
       this.productService.getProductById(id).subscribe((product) => {
@@ -28,9 +30,9 @@ export class ProductDeleteComponent implements OnInit {
   submit() {
     this.productService.delete(this.product.id).subscribe(() => {
       this.router.navigateByUrl('/product/list');
-      console.log('Deleted successfully!');
+      this.notificationService.showMessage('success', 'Deleted successfully!');
     }, error => {
-      console.log('Deleted error!');
+      this.notificationService.showMessage('error', 'Deleted error!');
     });
   }
 }
